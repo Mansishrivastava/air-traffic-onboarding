@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ContactsScreen.module.css';
+import Image from 'next/image';
 import Sidebar from '../common/Sidebar';
 
 interface Contact {
@@ -88,8 +88,8 @@ const ContactsScreen: React.FC = () => {
           <h2 style={{ fontSize: 32, fontWeight: 800, fontFamily: 'serif' }}>Contacts</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span style={{ fontWeight: 600 }}>Katie Barker</span>
-            <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#eee', overflow: 'hidden' }}>
-              <img src="/profile-photo.png" alt="Katie Barker" style={{ width: '100%', height: '100%' }} />
+            <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#eee', overflow: 'hidden', position: 'relative' }}>
+              <Image src="/profile-photo.png" alt="Katie Barker" fill style={{ objectFit: 'cover' }} />
             </div>
           </div>
         </div>

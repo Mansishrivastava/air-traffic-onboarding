@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import styles from "./LandingScreen.module.css";
+import Image from 'next/image';
 
 const LandingScreen = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const LandingScreen = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <img src="/logo.svg" alt="Air Traffic Control" />
+          <Image src="/logo.svg" alt="Air Traffic Control" width={200} height={40} />
         </div>
         <nav className={styles.nav}>
           <a href="#" className={styles.link}>Use Cases</a>
@@ -33,7 +34,7 @@ const LandingScreen = () => {
           <button onClick={handleBookDemo} className={styles.bookDemoBtn}>Book a Demo</button>
         </div>
         <div>
-          <img src="/landing.png" alt="Demo preview" className={styles.heroImg} />
+          <Image src="/landing.png" alt="Demo preview" width={600} height={400} className={styles.heroImg} />
         </div>
       </main>
       <section className={styles.section}>
@@ -55,6 +56,9 @@ const LandingScreen = () => {
           </ul>
         </div>
       </section>
+      <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#eee', overflow: 'hidden', position: 'relative' }}>
+        <Image src="/profile-photo.png" alt="Katie Barker" fill style={{ objectFit: 'cover' }} />
+      </div>
     </div>
   );
 };

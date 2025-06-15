@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const VerifyIdentityScreen = () => {
@@ -59,6 +59,9 @@ const VerifyIdentityScreen = () => {
     <div style={{ display: 'flex', minHeight: '100vh', background: '#F8F8F8' }}>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0 2rem' }}>
         <h1 style={{ fontSize: 48, fontWeight: 900, fontFamily: 'serif', marginBottom: 24 }}>Verify your identity</h1>
+        <p style={{ fontSize: 18, marginBottom: 32, color: '#555' }}>
+          We&apos;ve sent a verification code to your email address.
+        </p>
         <div style={{ fontSize: 18, color: '#666', marginBottom: 32, textAlign: 'center' }}>
           Enter the 6-digit code sent to<br />
           <span style={{ fontWeight: 600, color: '#222' }}>{maskEmail(email)}</span>
@@ -105,7 +108,7 @@ const VerifyIdentityScreen = () => {
         >
           Verify
         </button>
-        <div style={{ fontSize: 16, color: '#222' }}>Didn't receive the code? <a href="#" style={{ color: '#FF7E7E', textDecoration: 'none' }}>Resend</a></div>
+        <div style={{ fontSize: 16, color: '#222' }}>Didn&apos;t receive the code? <a href="#" style={{ color: '#FF7E7E', textDecoration: 'none' }}>Resend</a></div>
       </div>
       <div 
         style={{ 

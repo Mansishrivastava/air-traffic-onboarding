@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import Image from 'next/image';
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -39,11 +40,12 @@ const WelcomeScreen = () => {
         Check out this video to learn about how we can help your business through personalized content.
       </p>
       <div style={{ position: 'relative', marginBottom: 40 }}>
-        <img
+        <Image
           src="/welcome.svg"
           alt="Mailchimp sign"
+          width={480}
+          height={320}
           style={{
-            width: 480,
             borderRadius: 24,
             boxShadow: '0 4px 32px rgba(0,0,0,0.08)'
           }}

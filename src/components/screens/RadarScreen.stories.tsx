@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 import RadarScreen from './RadarScreen';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../theme";

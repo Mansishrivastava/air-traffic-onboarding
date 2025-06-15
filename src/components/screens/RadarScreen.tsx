@@ -1,13 +1,6 @@
 import React from "react";
 import Sidebar from "../common/Sidebar";
 
-const overview = [
-  { label: "New personalized engagements", value: "140", change: "+16%", changeColor: "#43A047", bg: "#F5F6FA" },
-  { label: "Personalized content engagement rate", value: "120%", change: "-4%", changeColor: "#E53935", bg: "#F5F6FA", sub: "vs. non-personalized" },
-  { label: "Personalization score", value: "B+", change: "+", changeColor: "#43A047", bg: "#F5F6FA", sub: <span style={{ color: '#E53935', fontSize: 14 }}>How can I improve my score?</span> },
-  { label: "Content Influenced Revenue", value: "$10K", change: "-4%", changeColor: "#E53935", bg: "#F5F6FA" },
-];
-
 const recommendedTopics = [
   { topic: "Celebrity news", contacts: 369, incidence: 2 },
   { topic: "Politics", contacts: 5038, incidence: 4 },

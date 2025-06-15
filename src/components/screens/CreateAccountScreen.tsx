@@ -6,7 +6,6 @@ const CreateAccountScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
-  const [showEmail, setShowEmail] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -21,7 +20,6 @@ const CreateAccountScreen = () => {
 
   const handleCreateAccount = () => {
     if (isValidEmail) {
-      setShowEmail(true);
       setTimeout(() => {
         router.push(`/verify-identity?email=${encodeURIComponent(email)}`);
       }, 1500);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const menuItems = [
   { label: 'Radar', route: '/radar', icon: (
@@ -21,8 +21,8 @@ const menuItems = [
 
 const Sidebar: React.FC = () => {
   const router = useRouter();
-  // @ts-ignore - pathname is added by our mock
-  const currentPath = router.pathname || (typeof window !== 'undefined' ? window.location.pathname : '/competitors');
+  const pathname = usePathname();
+  const currentPath = pathname || '/competitors';
 
   return (
     <aside style={{ width: 260, background: '#0B0B3B', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2rem 0', borderTopRightRadius: 40, minHeight: '100vh' }}>
