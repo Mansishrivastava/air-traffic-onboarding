@@ -7,24 +7,51 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 4rem;
+  padding: 1.5rem 3rem;
   background: #F6F6F6;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
   font-weight: 700;
   font-size: 24px;
+  color: #0B0B3B;
+}
+
+.brandName {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #0B0B3B;
 }
 
 .nav {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
   align-items: center;
 }
 
 .link {
   color: #222;
   text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.link:hover {
+  color: #FF7E7E;
+  background: #fff0f0;
 }
 
 .signInBtn {
@@ -34,6 +61,15 @@
   border-radius: 24px;
   padding: 0.75rem 2rem;
   font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.signInBtn:hover {
+  background: #FF7E7E;
+  color: #fff;
 }
 
 .startBtn {
@@ -42,8 +78,26 @@
   border: none;
   border-radius: 24px;
   padding: 0.75rem 2rem;
-  margin-left: 12px;
+  margin-left: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(255,126,126,0.08);
+  transition: background 0.2s;
+}
+
+.startBtn:hover {
+  background: #e55b5b;
+}
+
+.bookDemoBtn {
+  background: #FF7E7E;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .main {
@@ -67,15 +121,6 @@
 .heroDesc {
   font-size: 18px;
   margin-bottom: 32px;
-}
-
-.bookDemoBtn {
-  background: #FF7E7E;
-  color: #fff;
-  border: none;
-  border-radius: 24px;
-  padding: 0.75rem 2rem;
-  font-weight: 600;
 }
 
 .heroImg {
@@ -102,4 +147,33 @@
 .sectionList {
   font-size: 18px;
   line-height: 2;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+  }
+  .nav {
+    margin-top: 1rem;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0.5rem 0.5rem;
+  }
+  .logo {
+    font-size: 18px;
+  }
+  .nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .signInBtn, .startBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
 } 

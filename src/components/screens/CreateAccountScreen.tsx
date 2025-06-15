@@ -20,9 +20,7 @@ const CreateAccountScreen = () => {
 
   const handleCreateAccount = () => {
     if (isValidEmail) {
-      setTimeout(() => {
-        router.push(`/verify-identity?email=${encodeURIComponent(email)}`);
-      }, 1500);
+      router.push(`/verify-identity?email=${encodeURIComponent(email)}`);
     }
   };
 

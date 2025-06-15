@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import styles from "./LandingScreen.module.css";
 import Image from 'next/image';
+import Link from 'next/link';
 
 const LandingScreen = () => {
   const router = useRouter();
@@ -12,14 +13,15 @@ const LandingScreen = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <Image src="/logo.svg" alt="Air Traffic Control" width={200} height={40} />
+          <Image src="/logo-img.png" alt="Air Traffic Control" width={40} height={40} />
+          <span className={styles.brandName}>Air Traffic Control</span>
         </div>
         <nav className={styles.nav}>
-          <a href="#" className={styles.link}>Use Cases</a>
-          <a href="#" className={styles.link}>Pricing</a>
-          <a href="#" className={styles.link}>Resources</a>
-          <a href="#" className={styles.link}>Demo</a>
-          <button className={styles.signInBtn}>Sign in</button>
+          <Link href="/use-cases" className={styles.link}>Use Cases</Link>
+          <Link href="/pricing" className={styles.link}>Pricing</Link>
+          <Link href="/resources" className={styles.link}>Resources</Link>
+          <Link href="/demo" className={styles.link}>Demo</Link>
+          <button onClick={handleBookDemo}  className={styles.signInBtn}>Sign in</button>
           <button onClick={handleBookDemo} className={styles.startBtn}>Start for free</button>
         </nav>
       </header>

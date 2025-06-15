@@ -51,6 +51,7 @@ const theme = createTheme({
           borderRadius: '24px',
           padding: '0.75rem 2rem',
           fontSize: '1rem',
+          cursor: 'pointer',
         },
       },
     },

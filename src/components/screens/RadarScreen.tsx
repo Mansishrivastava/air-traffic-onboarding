@@ -68,7 +68,7 @@ const RadarScreen: React.FC = () => (
         {/* Placeholder for topic radar and content to promote */}
         <div style={{ flex: 1, minWidth: 320 }}>
           <div style={{ background: '#23235B', borderRadius: 24, height: 320, marginBottom: 24, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 20 }}>
-            Topic radar (placeholder)
+            Topic radar 
           </div>
           <div style={{ background: '#fff', borderRadius: 24, minHeight: 160, color: '#23235B', padding: 24, fontWeight: 700, fontSize: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             Content to promote (placeholder)

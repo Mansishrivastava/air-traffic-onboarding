@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 const menuItems = [
   { label: 'Radar', route: '/radar', icon: (
@@ -26,9 +27,27 @@ const Sidebar: React.FC = () => {
 
   return (
     <aside style={{ width: 260, background: '#0B0B3B', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2rem 0', borderTopRightRadius: 40, minHeight: '100vh' }}>
-      <div style={{ fontWeight: 700, fontSize: 28, marginBottom: 48, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{ fontFamily: 'serif', fontWeight: 900, fontSize: 40 }}>A</span>
-        <span style={{ fontFamily: 'serif', fontWeight: 700 }}>ir Traffic Control</span>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 8,
+        fontWeight: 700,
+        fontSize: 28,
+        marginBottom: 48,
+        cursor: 'pointer'
+      }}
+      onClick={() => router.push('/')}
+      >
+        <Image src="/logo-img-white.png" alt="Air Traffic Control" width={40} height={40} />
+        <span style={{
+          fontFamily: 'serif',
+          fontWeight: 700,
+          fontSize: 20,
+          color: '#fff'
+        }}>
+          Air Traffic Control
+        </span>
       </div>
       <nav style={{ width: '100%' }}>
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
