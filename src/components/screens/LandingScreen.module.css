@@ -1,0 +1,105 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #F8E6E6 0%, #F8F8F8 100%);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  background: #F6F6F6;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.link {
+  color: #222;
+  text-decoration: none;
+}
+
+.signInBtn {
+  border: 2px solid #FF7E7E;
+  color: #FF7E7E;
+  background: transparent;
+  border-radius: 24px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+}
+
+.startBtn {
+  background: #FF7E7E;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.75rem 2rem;
+  margin-left: 12px;
+  font-weight: 600;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 8rem 2rem 8rem;
+}
+
+.heroText {
+  max-width: 540px;
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 900;
+  font-family: serif;
+  margin-bottom: 24px;
+}
+
+.heroDesc {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.bookDemoBtn {
+  background: #FF7E7E;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+}
+
+.heroImg {
+  width: 480px;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  gap: 6rem;
+  padding: 4rem 0;
+  background: #fff;
+}
+
+.sectionTitle {
+  font-family: serif;
+  font-weight: 900;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.sectionList {
+  font-size: 18px;
+  line-height: 2;
+} 
