@@ -7,7 +7,6 @@ const CreateAccountScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
-  const [showEmail, setShowEmail] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -33,8 +32,7 @@ const CreateAccountScreen = () => {
       const response = await apiService.createUser(email);
   
       // Redirect even if response is 204 (No Content) – mock redirection for testing
-      if (response.status === 204 || response?.data?.success) {
-        setShowEmail(true);
+      if (response.status === 204 || (response?.data as { success?: boolean })?.success) {
         setTimeout(() => {
           router.push(`/verify-identity?email=${encodeURIComponent(email)}`);
         }, 1500);
@@ -45,7 +43,7 @@ const CreateAccountScreen = () => {
         setError(response.error);
         return;
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import styles from './ContactsScreen.module.css';
 import Sidebar from '../common/Sidebar';
 import { apiService } from '../../services/api';
+import Image from 'next/image';
 
 interface Contact {
   firstName: string;
@@ -93,10 +93,10 @@ const ContactsScreen: React.FC = () => {
         const response = await apiService.getContacts();
         if (response.error) {
           setError(response.error);
-        } else if (Array.isArray(response.data?.content)) {
-          setContacts(response.data.content);
+        } else if (Array.isArray((response.data as { content: Contact[] })?.content)) {
+          setContacts((response.data as { content: Contact[] }).content);
         }
-      } catch (err) {
+      } catch {
         setError("Failed to load contacts.");
       } finally {
         setLoading(false);
@@ -114,7 +114,7 @@ const ContactsScreen: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span style={{ fontWeight: 600 }}>Katie Barker</span>
             <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#eee', overflow: 'hidden' }}>
-              <img src="/profile-photo.png" alt="Katie Barker" style={{ width: '100%', height: '100%' }} />
+              <Image src="/profile-photo.png" alt="Katie Barker" width={40} height={40} style={{ width: '100%', height: '100%' }} />
             </div>
           </div>
         </div>

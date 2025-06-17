@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { apiService } from "../../services/api";
 
@@ -75,7 +75,7 @@ const VerifyIdentityScreen = () => {
 
       // Redirect to next screen
       router.push('/verify-url');
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
@@ -165,7 +165,7 @@ const VerifyIdentityScreen = () => {
             'Verify'
           )}
         </button>
-        <div style={{ fontSize: 16, color: '#222' }}>Didn't receive the code? <a href="#" style={{ color: '#FF7E7E', textDecoration: 'none' }}>Resend</a></div>
+        <div style={{ fontSize: 16, color: '#222' }}>Didn&apos;t receive the code? <a href="#" style={{ color: '#FF7E7E', textDecoration: 'none' }}>Resend</a></div>
       </div>
       <div 
         style={{ 

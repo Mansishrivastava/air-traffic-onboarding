@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../common/Sidebar";
 import { apiService } from "../../services/api";
+import Image from 'next/image';
+
+interface Competitor {
+  name: string;
+  websiteURL: string;
+  linkedinSlug: string;
+}
 
 // const competitors = [
 //   { name: "Rogers Stirk Harbour + Parker", url: "https://www.competitorwebsite.com", linkedin: "/Rogers Stirk Harbour+Parker" },
@@ -11,7 +18,7 @@ import { apiService } from "../../services/api";
 // ];
 
 const CompetitorsScreen = () => {
-  const [competitors, setCompetitors] = useState<any[]>([]);
+  const [competitors, setCompetitors] = useState<Competitor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -24,9 +31,9 @@ const CompetitorsScreen = () => {
         if (response.error) {
           setError(response.error);
         } else if (Array.isArray(response.data)) {
-          setCompetitors(response.data);
+          setCompetitors(response.data as Competitor[]);
         }
-      } catch (err) {
+      } catch {
         setError("Failed to load competitors.");
       } finally {
         setLoading(false);
@@ -45,7 +52,7 @@ const CompetitorsScreen = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span style={{ fontWeight: 600 }}>Katie Barker</span>
             <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#eee', overflow: 'hidden' }}>
-              <img src="/profile-photo.png" alt="Katie Barker" style={{ width: '100%', height: '100%' }} />
+              <Image src="/profile-photo.png" alt="Katie Barker" width={40} height={40} style={{ width: '100%', height: '100%' }} />
             </div>
           </div>
         </div>

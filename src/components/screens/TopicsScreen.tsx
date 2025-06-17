@@ -1,6 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../common/Sidebar";
 import { apiService } from "../../services/api";
+import Image from 'next/image';
+
+interface Topic {
+  topic: string;
+  engagement: string;
+  competition: number;
+  coverage: string;
+  coverageColor: string;
+  competitorCoverage: string;
+  competitorCoverageColor: string;
+}
+
+interface TopicSummary {
+  value: string;
+  coverageScore: number;
+  topicCompetition: number;
+}
+
+interface TopicIncidence {
+  value: string;
+  engagement: number;
+}
 
 // const topics = [
 //   { topic: "Celebrity news", engagement: "60%", competition: 3, coverage: "Poor", coverageColor: "#E53935", competitorCoverage: "Great", competitorCoverageColor: "#43A047" },
@@ -32,7 +54,7 @@ function getCoverage(score: number) {
 }
 
 const TopicsScreen: React.FC = () => {
-  const [topics, setTopics] = useState<any[]>([]);
+  const [topics, setTopics] = useState<Topic[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -52,17 +74,17 @@ const TopicsScreen: React.FC = () => {
           return;
         }
         // Merge data by topic value
-        const summaries = summariesRes.data?.content || [];
+        const summaries = (summariesRes.data as { content?: TopicSummary[] })?.content || [];
         const incidence = Array.isArray(incidenceRes.data) ? incidenceRes.data : [];
         // For this example, we don't use audienceRes directly, but you can add logic as needed
-        const merged = summaries.map((s: any) => {
-          const i = incidence.find((ii: any) => ii.value === s.value);
+        const merged = summaries.map((s: TopicSummary) => {
+          const i = incidence.find((ii: unknown) => (ii as TopicIncidence).value === s.value);
           const coverage = getCoverage(s.coverageScore);
           // For demo, competitorCoverage is randomized
           const competitorCoverage = getCoverage(Math.floor(Math.random() * 100));
           return {
             topic: s.value,
-            engagement: i ? `${i.engagement}%` : '-',
+            engagement: i ? `${(i as TopicIncidence).engagement}%` : '-',
             competition: s.topicCompetition,
             coverage: coverage.label,
             coverageColor: coverage.color,
@@ -71,7 +93,7 @@ const TopicsScreen: React.FC = () => {
           };
         });
         setTopics(merged);
-      } catch (err) {
+      } catch {
         setError("Failed to load topics.");
       } finally {
         setLoading(false);
@@ -103,24 +125,26 @@ const TopicsScreen: React.FC = () => {
               <thead>
                 <tr style={{ background: 'none' }}>
                   <th style={{ textAlign: 'left', padding: '16px 12px', color: '#888', fontWeight: 600 }}>Topic <span style={{ fontSize: 16 }}>
-                    <img src="/updown.svg" alt="updown" />
+                    <Image src="/updown.svg" alt="updown" width={16} height={16} />
                     </span></th>
                   <th style={{ textAlign: 'left', padding: '16px 12px', color: '#888', fontWeight: 600 }}>Engagement Rate <span style={{ fontSize: 16 }}>
-                  <img src="/updown.svg" alt="updown" /></span></th>
+                    <Image src="/updown.svg" alt="updown" width={16} height={16} /></span></th>
                   <th style={{ textAlign: 'left', padding: '16px 12px', color: '#888', fontWeight: 600 }}>Topic Competition <span style={{ fontSize: 16 }}>
-                  <img src="/updown.svg" alt="updown" /></span></th>
+                    <Image src="/updown.svg" alt="updown" width={16} height={16} /></span></th>
                   <th style={{ textAlign: 'left', padding: '16px 12px', color: '#888', fontWeight: 600 }}>Coverage Score <span style={{ fontSize: 16 }}>
-                  <img src="/updown.svg" alt="updown" />
+                    <Image src="/updown.svg" alt="updown" width={16} height={16} />
                     ?</span></th>
                   <th style={{ textAlign: 'left', padding: '16px 12px', color: '#888', fontWeight: 600 }}>Competitor Coverage Score <span style={{ fontSize: 16 }}>
-                  <img src="/updown.svg" alt="updown" />
+                    <Image src="/updown.svg" alt="updown" width={16} height={16} />
                     ?</span></th>
                 </tr>
               </thead>
               <tbody>
                 {topics.map((t, i) => (
                   <tr key={i} style={{ background: '#FAFAFA', borderRadius: 16, boxShadow: '0 1px 0 #E0E0E0', marginBottom: 8 }}>
-                    <td style={{ padding: '16px 12px', borderBottom: '1px solid #E0E0E0', borderTopLeftRadius: 16, borderBottomLeftRadius: 16 }}>{t.topic}</td>
+                    <td style={{ padding: '16px 12px', borderBottom: '1px solid #E0E0E0', borderTopLeftRadius: 16, borderBottomLeftRadius: 16 }}>
+                      {t.topic}
+                    </td>
                     <td style={{ padding: '16px 12px', borderBottom: '1px solid #E0E0E0' }}>{t.engagement}</td>
                     <td style={{ padding: '16px 12px', borderBottom: '1px solid #E0E0E0' }}>{t.competition}</td>
                     <td style={{ padding: '16px 12px', borderBottom: '1px solid #E0E0E0' }}>

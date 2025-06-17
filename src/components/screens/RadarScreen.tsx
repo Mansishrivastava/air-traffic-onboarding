@@ -2,6 +2,30 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../common/Sidebar";
 import { apiService } from "../../services/api";
 
+interface OverviewData {
+  newPersonalizedEngagements: {
+    engagements?: number;
+    changePercentage?: number;
+  } | null;
+  personalizedContentEngagementRate: {
+    engagementRate?: number;
+    changePercentage?: number;
+  } | null;
+  personalizationScore: {
+    score?: string;
+  } | null;
+  contentInfluencedRevenue: {
+    revenue?: number;
+    changePercentage?: number;
+  } | null;
+}
+
+interface RecommendedTopic {
+  topic: string;
+  contacts: number;
+  incidence: number;
+}
+
 // const overview = [
 //   { label: "New personalized engagements", value: "140", change: "+16%", changeColor: "#43A047", bg: "#F5F6FA" },
 //   { label: "Personalized content engagement rate", value: "120%", change: "-4%", changeColor: "#E53935", bg: "#F5F6FA", sub: "vs. non-personalized" },
@@ -18,14 +42,14 @@ import { apiService } from "../../services/api";
 
 const RadarScreen: React.FC = () => {
   // State for overview cards
-  const [overview, setOverview] = useState<any>({
+  const [overview, setOverview] = useState<OverviewData>({
     newPersonalizedEngagements: null,
     personalizedContentEngagementRate: null,
     personalizationScore: null,
     contentInfluencedRevenue: null,
   });
   // State for recommended topics
-  const [recommendedTopics, setRecommendedTopics] = useState<any[]>([]);
+  const [recommendedTopics, setRecommendedTopics] = useState<RecommendedTopic[]>([]);
   // State for user name
   const [userName, setUserName] = useState<string>("");
   const [nameLoading, setNameLoading] = useState(true);
@@ -43,10 +67,10 @@ const RadarScreen: React.FC = () => {
         const response = await apiService.getAccountDetails("1");
         if (response.error) {
           setNameError(response.error);
-        } else if (response.data?.name) {
-          setUserName(response.data.name);
+        } else if ((response.data as { name?: string })?.name) {
+          setUserName((response.data as { name: string }).name);
         }
-      } catch (err) {
+      } catch {
         setNameError("Failed to load account details.");
       } finally {
         setNameLoading(false);
@@ -82,13 +106,16 @@ const RadarScreen: React.FC = () => {
           contentInfluencedRevenue: revenueRes.data?.[0] || null,
         });
         setRecommendedTopics(
-          (topicsRes.data || []).map((t: any) => ({
-            topic: t.value,
-            contacts: t.contactIncidence,
-            incidence: t.topicIncidence,
-          }))
+          (topicsRes.data || []).map((t: unknown) => {
+            const typedT = t as { value: string; contactIncidence: number; topicIncidence: number };
+            return {
+              topic: typedT.value,
+              contacts: typedT.contactIncidence,
+              incidence: typedT.topicIncidence,
+            };
+          })
         );
-      } catch (err: any) {
+      } catch {
         setError("Failed to load data");
       } finally {
         setLoading(false);

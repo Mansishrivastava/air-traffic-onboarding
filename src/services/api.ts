@@ -99,7 +99,7 @@ class ApiService {
   }
 
   // Create user account
-  async createUser(email: string): Promise<ApiResponse<any>> {
+  async createUser(email: string): Promise<ApiResponse<unknown>> {
     return this.makeRequest('/auth/user', {
       method: 'POST',
       body: JSON.stringify({ email }),
@@ -137,91 +137,91 @@ class ApiService {
   }
 
   // Get account details by ID
-  async getAccountDetails(id: string): Promise<ApiResponse<any>> {
+  async getAccountDetails(id: string): Promise<ApiResponse<unknown>> {
     return this.makeRequest(`/account/${id}`, {
       method: 'GET',
     });
   }
 
   // Get competitors list
-  async getCompetitors(): Promise<ApiResponse<any[]>> {
+  async getCompetitors(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/competitors', {
       method: 'GET',
     });
   }
 
   // Get contacts list
-  async getContacts(): Promise<ApiResponse<any>> {
+  async getContacts(): Promise<ApiResponse<unknown>> {
     return this.makeRequest('/contacts', {
       method: 'GET',
     });
   }
 
   // Get topic summaries
-  async getTopicSummaries(): Promise<ApiResponse<any>> {
+  async getTopicSummaries(): Promise<ApiResponse<unknown>> {
     return this.makeRequest('/topics/summaries', {
       method: 'GET',
     });
   }
 
   // Get topic incidence and engagement
-  async getTopicIncidenceAndEngagement(): Promise<ApiResponse<any[]>> {
+  async getTopicIncidenceAndEngagement(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/topics/incidenceAndEngagement', {
       method: 'GET',
     });
   }
 
   // Get topic audience relevance
-  async getTopicAudienceRelevance(): Promise<ApiResponse<any>> {
+  async getTopicAudienceRelevance(): Promise<ApiResponse<unknown>> {
     return this.makeRequest('/topics/audienceRelevance', {
       method: 'GET',
     });
   }
 
   // Get content to promote
-  async getContentToPromote(): Promise<ApiResponse<any[]>> {
+  async getContentToPromote(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/contentToPromote', {
       method: 'GET',
     });
   }
 
   // Get topics to write about
-  async getTopicsToWriteAbout(): Promise<ApiResponse<any[]>> {
+  async getTopicsToWriteAbout(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/topicsToWriteAbout', {
       method: 'GET',
     });
   }
 
   // Get topics incidence and engagement
-  async getTopicsIncidenceAndEngagement(): Promise<ApiResponse<any[]>> {
+  async getTopicsIncidenceAndEngagement(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/topicsIncidenceAndEngagement', {
       method: 'GET',
     });
   }
 
   // Get personalization score
-  async getPersonalizationScore(): Promise<ApiResponse<any[]>> {
+  async getPersonalizationScore(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/personalizationScore', {
       method: 'GET',
     });
   }
 
   // Get content influenced revenue
-  async getContentInfluencedRevenue(): Promise<ApiResponse<any[]>> {
+  async getContentInfluencedRevenue(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/contentInfluencedRevenue', {
       method: 'GET',
     });
   }
 
   // Get new personalized engagements score
-  async getNewPersonalizedEngagementsScore(): Promise<ApiResponse<any[]>> {
+  async getNewPersonalizedEngagementsScore(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/newPersonalizedEngagementsScore', {
       method: 'GET',
     });
   }
 
   // Get personalized content engagement rate
-  async getPersonalizedContentEngagementRate(): Promise<ApiResponse<any[]>> {
+  async getPersonalizedContentEngagementRate(): Promise<ApiResponse<unknown[]>> {
     return this.makeRequest('/radar/personalizedContentEngagementRate', {
       method: 'GET',
     });

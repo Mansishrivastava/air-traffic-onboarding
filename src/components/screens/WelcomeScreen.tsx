@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { apiService } from "../../services/api";
+import Image from 'next/image';
 
 const WelcomeScreen = () => {
   const router = useRouter();
@@ -19,10 +20,10 @@ const WelcomeScreen = () => {
         const response = await apiService.getAccountDetails("1");
         if (response.error) {
           setError(response.error);
-        } else if (response.data?.name) {
-          setName(response.data.name);
+        } else if ((response.data as { name?: string })?.name) {
+          setName((response.data as { name: string }).name);
         }
-      } catch (err) {
+      } catch {
         setError("Failed to load account details.");
       } finally {
         setLoading(false);
@@ -64,11 +65,12 @@ const WelcomeScreen = () => {
         Check out this video to learn about how we can help your business through personalized content.
       </p>
       <div style={{ position: 'relative', marginBottom: 40 }}>
-        <img
+        <Image
           src="/welcome.svg"
           alt="Mailchimp sign"
+          width={480}
+          height={300}
           style={{
-            width: 480,
             borderRadius: 24,
             boxShadow: '0 4px 32px rgba(0,0,0,0.08)'
           }}
