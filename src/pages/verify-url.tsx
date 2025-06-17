@@ -11,7 +11,7 @@ const VerifyUrlScreen = () => {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0 2rem' }}>
         <h1 style={{ fontSize: 48, fontWeight: 900, fontFamily: 'serif', marginBottom: 16 }}>Is this your URL?</h1>
         <p style={{ fontSize: 20, marginBottom: 32, color: '#555', textAlign: 'center', maxWidth: 540 }}>
-          We have detected this as the URL for your company&apos;s website. Please verify its accuracy.
+          We have detected this as the URL for your company's website. Please verify its accuracy.
         </p>
         <input
           type="text"

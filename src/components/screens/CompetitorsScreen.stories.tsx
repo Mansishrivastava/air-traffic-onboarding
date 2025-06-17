@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/react';
 import CompetitorsScreen from './CompetitorsScreen';
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../theme";

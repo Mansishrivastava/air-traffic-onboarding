@@ -1,11 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { apiService } from "../../services/api";
 
 const CreateAccountScreen = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,13 +20,38 @@ const CreateAccountScreen = () => {
     const newEmail = e.target.value;
     setEmail(newEmail);
     setIsValidEmail(validateEmail(newEmail));
+    setError(""); // Clear error when user types
   };
 
-  const handleCreateAccount = () => {
-    if (isValidEmail) {
-      router.push(`/verify-identity?email=${encodeURIComponent(email)}`);
+  const handleCreateAccount = async () => {
+    if (!isValidEmail) return;
+  
+    setIsLoading(true);
+    setError("");
+  
+    try {
+      const response = await apiService.createUser(email);
+  
+      // Redirect even if response is 204 (No Content) – mock redirection for testing
+      if (response.status === 204 || response?.data?.success) {
+        setShowEmail(true);
+        setTimeout(() => {
+          router.push(`/verify-identity?email=${encodeURIComponent(email)}`);
+        }, 1500);
+        return;
+      }
+  
+      if (response.error) {
+        setError(response.error);
+        return;
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#F8F8F8' }}>
@@ -48,11 +77,24 @@ const CreateAccountScreen = () => {
           />
           <div style={{ fontSize: 14, color: '#888', marginBottom: 24 }}>Use your work email address</div>
         </div>
+        
+        {error && (
+          <div style={{ 
+            color: '#ff4444', 
+            fontSize: 14, 
+            marginBottom: 16, 
+            textAlign: 'center',
+            width: 360 
+          }}>
+            {error}
+          </div>
+        )}
+        
         <button 
           onClick={handleCreateAccount} 
-          disabled={!isValidEmail}
+          disabled={!isValidEmail || isLoading}
           style={{ 
-            background: isValidEmail ? '#FF7E7E' : '#cccccc',
+            background: isValidEmail && !isLoading ? '#FF7E7E' : '#cccccc',
             color: '#fff', 
             border: 'none', 
             borderRadius: 24, 
@@ -61,15 +103,41 @@ const CreateAccountScreen = () => {
             fontSize: 20, 
             width: 360, 
             marginBottom: 16,
-            cursor: isValidEmail ? 'pointer' : 'not-allowed'
+            cursor: isValidEmail && !isLoading ? 'pointer' : 'not-allowed',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8
           }}
         >
-          Create account
+          {isLoading ? (
+            <>
+              <div style={{
+                width: 20,
+                height: 20,
+                border: '2px solid #fff',
+                borderTop: '2px solid transparent',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}></div>
+              Creating account...
+            </>
+          ) : (
+            'Create account'
+          )}
         </button>
+        
         <div style={{ fontSize: 16, color: '#222' }}>Already have an account? <a href="#" style={{ color: '#FF7E7E', textDecoration: 'none' }}>Sign in</a></div>
       </div>
       <div style={{ flex: 1, borderTopLeftRadius: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', backgroundImage: 'url(/screen1.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
       </div>
+      
+      <style jsx>{`
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 };

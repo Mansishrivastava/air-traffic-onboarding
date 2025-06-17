@@ -1,11 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from 'next/image';
+import { apiService } from "../../services/api";
 
 const WelcomeScreen = () => {
   const router = useRouter();
+  const [name, setName] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchAccount = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        // Replace '1' with dynamic id if needed
+        const response = await apiService.getAccountDetails("1");
+        if (response.error) {
+          setError(response.error);
+        } else if (response.data?.name) {
+          setName(response.data.name);
+        }
+      } catch (err) {
+        setError("Failed to load account details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAccount();
+  }, []);
 
   const handleSubmit = () => {
     if (router?.push) {
@@ -30,7 +54,7 @@ const WelcomeScreen = () => {
         fontFamily: 'serif',
         marginBottom: 16
       }}>
-        Welcome to Air Traffic Control, Katie
+        {loading ? 'Loading...' : error ? 'Welcome!' : `Welcome to Air Traffic Control, ${name || 'User'}`}
       </h1>
       <p style={{
         fontSize: 18,
@@ -40,12 +64,11 @@ const WelcomeScreen = () => {
         Check out this video to learn about how we can help your business through personalized content.
       </p>
       <div style={{ position: 'relative', marginBottom: 40 }}>
-        <Image
+        <img
           src="/welcome.svg"
           alt="Mailchimp sign"
-          width={480}
-          height={320}
           style={{
+            width: 480,
             borderRadius: 24,
             boxShadow: '0 4px 32px rgba(0,0,0,0.08)'
           }}
@@ -80,9 +103,13 @@ const WelcomeScreen = () => {
           fontWeight: 600,
           fontSize: 20
         }}
+        disabled={loading}
       >
         Continue
       </button>
+      {error && (
+        <div style={{ color: '#ff4444', marginTop: 16 }}>{error}</div>
+      )}
     </div>
   );
 };
